@@ -3,33 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Counter - My Tool</title>
+    
+    <title>เครื่องมือนับตัวอักษร นับคำนิยาย ออนไลน์ - สะอาดตา ไม่มีโฆษณา</title>
+    <meta name="description" content="เช็คจำนวนตัวอักษรและนับคำสำหรับนักเขียนนิยาย ใช้งานฟรี ไม่มีโฆษณา สะดวก รวดเร็ว และเป็นส่วนตัว">
+    <meta name="keywords" content="นับตัวอักษร, นับคำ, นับคำนิยาย, เช็คจำนวนอักษร, เครื่องมือนักเขียน">
+
+    <meta property="og:title" content="เครื่องมือนับตัวอักษรสำหรับนักเขียน">
+    <meta property="og:description" content="เช็คจำนวนคำและตัวอักษรแบบคลีนๆ ไม่รกตา">
+    <meta property="og:url" content="https://yosora62-yoho.github.io/my-tools/">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Sarabun', sans-serif; text-align: center; color: #333; background-color: #fafafa; }
+        body { font-family: 'Sarabun', sans-serif; text-align: center; color: #333; background-color: #fafafa; margin: 0; padding: 0; }
         .container { max-width: 600px; margin: 50px auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h1 { color: #222; margin-bottom: 10px; }
-        textarea { width: 100%; height: 180px; padding: 15px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; margin-bottom: 10px; box-sizing: border-box; }
-        .footer-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
+        h1 { color: #222; margin-bottom: 10px; font-size: 24px; }
+        textarea { width: 100%; height: 180px; padding: 15px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
+        textarea:focus { border-color: #ff8c00; }
+        .result-box { font-size: 18px; margin: 15px 0; color: #555; }
+        .footer-section { margin-top: 40px; padding-top: 25px; border-top: 1px solid #eee; }
         .btn-group { display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
         .btn { padding: 10px 18px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
-        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+        .btn:hover { opacity: 0.8; transform: translateY(-1px); }
         .btn-tmn { background-color: #ff8c00; color: white; }
         .btn-gh { background-color: #24292e; color: white; }
-        .logo { width: 22px; height: 22px; }
+        .logo { width: 20px; height: 20px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>เครื่องมือนับตัวอักษร</h1>
-        <p style="color: #666; margin-bottom: 25px;">เช็คจำนวนตัวอักษรและช่องว่างได้ง่ายๆ ในที่เดียว</p>
+        <p style="color: #666; margin-bottom: 25px;">นับจำนวนตัวอักษรและคำ สำหรับนักเขียนและคนทำคอนเทนต์</p>
         
         <textarea id="userInput" placeholder="วางข้อความที่นี่..."></textarea>
-        <p style="font-size: 18px;">จำนวนตัวอักษร: <span id="count" style="font-weight: bold; color: #ff8c00;">0</span></p>
+        
+        <div class="result-box">
+            จำนวนตัวอักษร: <span id="count" style="font-weight: bold; color: #ff8c00;">0</span>
+        </div>
 
         <div class="footer-section">
-            <p style="font-size: 14px; color: #777;">ชื่นชอบเครื่องมือนี้? สนับสนุนนักพัฒนาหรือติดตามผลงานได้ที่ลิงก์ด้านล่าง</p>
+            <p style="font-size: 13px; color: #777;">ชื่นชอบเครื่องมือนี้? สามารถสนับสนุนนักพัฒนาหรือติดตามผลงานได้ที่นี่</p>
             
             <div class="btn-group">
                 <a href="https://tmn.app.link/27Veyr09l1b" target="_blank" class="btn btn-tmn">
@@ -42,10 +56,24 @@
                     ติดตามบน GitHub
                 </a>
             </div>
-            <p style="font-size: 11px; color: #ccc; margin-top: 30px;">© 2026 Developed by yosora62-yoho</p>
+            <p style="font-size: 10px; color: #ccc; margin-top: 30px;">© 2026 Developed by yosora62-yoho</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // รวมสคริปต์ไว้ในไฟล์เดียวเพื่อให้จัดการง่าย
+        const userInput = document.getElementById('userInput');
+        const charCount = document.getElementById('count');
+
+        userInput.addEventListener('input', () => {
+            const text = userInput.value;
+            const charWithSpace = text.length;
+            const charNoSpace = text.replace(/\s+/g, '').length;
+            const wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+
+            // แสดงผลแบบละเอียดให้นักเขียนชอบ
+            charCount.innerHTML = `${charWithSpace} (รวมช่องว่าง) | ${charNoSpace} (ไม่รวมช่องว่าง) | ${wordCount} คำ`;
+        });
+    </script>
 </body>
 </html>
