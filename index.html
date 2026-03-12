@@ -61,7 +61,7 @@
     </div>
 
     <script>
-        // รวมสคริปต์ไว้ในไฟล์เดียวเพื่อให้จัดการง่าย
+        // รวมสคริปต์ไว้ในไฟล์เดียวว
         const userInput = document.getElementById('userInput');
         const charCount = document.getElementById('count');
 
@@ -71,7 +71,7 @@
             const charNoSpace = text.replace(/\s+/g, '').length;
             const wordCount = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
 
-            // แสดงผลแบบละเอียดให้นักเขียนชอบ
+            // แสดงผลแบบละเอียด
             charCount.innerHTML = `${charWithSpace} (รวมช่องว่าง) | ${charNoSpace} (ไม่รวมช่องว่าง) | ${wordCount} คำ`;
         });
     </script>
